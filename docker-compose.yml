@@ -1,0 +1,27 @@
+version: '2'
+services:
+    db:
+        image: mariadb:latest
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PW}
+        volumes:
+            - ./database:/var/lib/mysql    
+
+    tcat:
+        container_name: tcat
+        depends_on:
+            - db
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PW}
+            - ADMIN_PW=${ADMIN_PW}
+            - TCAT_PW=${TCAT_PW}
+            - CAPTURE_ROLE=track
+            - twitter_track_consumer_key=${TWITTER_CONSUMER_KEY}
+            - twitter_track_consumer_secret=${TWITTER_CONSUMER_SECRET}
+            - twitter_track_user_token=${TWITTER_USER_TOKEN}
+            - twitter_track_user_secret=${TWITTER_USER_SECRET}
+        build: .
+        ports:
+            - "8000:80"
+
+          

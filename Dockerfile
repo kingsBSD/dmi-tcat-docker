@@ -22,8 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -q -y --fix-missing install \
     python-all-dev \
     python-mysqldb \
     python-pip \
-    python-setuptools \
-    subversion \  
+    python-setuptools \  
     supervisor \
     wget
     
@@ -38,7 +37,6 @@ WORKDIR /geos-3.4.2
 RUN ./configure --enable-php
 RUN make
 RUN make install
-WORKDIR /geos-3.4.2
 
 WORKDIR /var/www/html
 RUN git clone --depth 1 https://github.com/digitalmethodsinitiative/dmi-tcat.git

@@ -60,7 +60,10 @@ COPY config.php /var/www/html/dmi-tcat/config.php
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
 COPY tcat_db.sql /tcat_db.sql
 COPY init_db.sh /init_db.sh
-COPY apache_pw.sh /apache_pw.sh 
+COPY apache_pw.sh /apache_pw.sh
+
+COPY index.html /var/www/html/index.html
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80

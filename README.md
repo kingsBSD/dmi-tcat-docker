@@ -7,16 +7,20 @@ Assumimg Ubuntu is being used, follow the [Docker installation instructions](htt
 is easiest to install docker-compose via pip, but this is probably safest inside a VirtualEnv, which itself is best installed via pip rather
 than your distribution's package-manager:
 
-```sudo apt-get install python-pip
-sudo pip install virtualenv```
+```
+sudo apt-get install python-pip
+sudo pip install virtualen
+```
 
 Next, download the repo and create a virtualenv for it. Activate it and install docker-compose.
 
-```git clone https://github.com/kingsBSD/dmi-tcat-docker
+```
+git clone https://github.com/kingsBSD/dmi-tcat-docker
 virtualenv dmi-tcat-docker
 cd dmi-tcat-docker
 source ./bin/activate
-pip install docker-compose```
+pip install docker-compose
+```
 
 Build and pull the tcat and MariaDB images with `.\build.sh`. Before you can run the containers,
 edit [run.sh](https://github.com/kingsBSD/dmi-tcat-docker/blob/master/run.sh). You will need to create a new

@@ -3,8 +3,22 @@ This Docker image allows the deployment of [dmi-tcat](https://github.com/digital
 [docker-compose](https://docs.docker.com/compose/) to provide a [MariaDB container](https://hub.docker.com/_/mariadb/) with
 persistant storage. It cannot be guaranteed to overcome any of the deficiencies of dmi-tcat itself.
 
-Assumimg Ubuntu is being used, follow the [Docker installation instructions](https://docs.docker.com/engine/installation/linux/ubuntu/). It
-is easiest to install docker-compose via pip, but this is probably safest inside a VirtualEnv, which itself is best installed via pip rather
+Assumimg Ubuntu is being used, follow the [Docker installation instructions](https://docs.docker.com/engine/installation/linux/ubuntu/):
+
+```
+sudo apt-get update
+sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+sudo groupadd docker
+sudo usermod -aG docker $USER
+```
+
+The last line will allow docker-compose to find the Docker daemon once you've logged out and back in again.
+It's easiest to install docker-compose via pip, but this is probably safest inside a VirtualEnv, which itself is best installed via pip rather
 than your distribution's package-manager:
 
 ```
@@ -12,7 +26,7 @@ sudo apt-get install python-pip
 sudo pip install virtualenv
 ```
 
-Next, download the repo and create a virtualenv for it. Activate it and install docker-compose.
+Next, download the repo and create a virtualenv for it. Activate it and install docker-compose:
 
 ```
 git clone https://github.com/kingsBSD/dmi-tcat-docker
@@ -38,15 +52,5 @@ For access to both the "capture" and "analysis" URLs, be sure to log in using th
 you can test the [GeoPHP](https://geophp.net/geos.html) installation at "/geostest.php", phpinfo is available at "/info.php".
 Shell into the container with `sudo docker exec -ti tcat /bin/bash`, the tcat logs will be in `/var/www/html/dmi-tcat/logs`,
 it might be worth looking at the Apache logs at `\var\log\apache2`. Stop and delete the containers with `docker-compose stop ` and
-`docker-compose rm -f `. Persistant data will be held in `./database`. Leave the virtualenv with `deactivate`.
-
-
-
-
-
-
-
-
-
-
-
+`docker-compose rm -f `. Persistant data will be held in `./database`. If the tcat repository is updated, refresh the image with
+`docker-engine build --no-cache`. Leave the virtualenv with `deactivate`.

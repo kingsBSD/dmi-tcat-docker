@@ -16,6 +16,7 @@ services:
             - ADMIN_PW=${ADMIN_PW}
             - TCAT_PW=${TCAT_PW}
             - CAPTURE_ROLE=track
+            - tcat_base_url=${TCAT_URL}
             - twitter_track_consumer_key=${TWITTER_CONSUMER_KEY}
             - twitter_track_consumer_secret=${TWITTER_CONSUMER_SECRET}
             - twitter_track_user_token=${TWITTER_USER_TOKEN}

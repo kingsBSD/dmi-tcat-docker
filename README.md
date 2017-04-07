@@ -9,7 +9,7 @@ than your distribution's package-manager:
 
 ```
 sudo apt-get install python-pip
-sudo pip install virtualen
+sudo pip install virtualenv
 ```
 
 Next, download the repo and create a virtualenv for it. Activate it and install docker-compose.

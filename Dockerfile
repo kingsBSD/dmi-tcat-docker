@@ -44,12 +44,17 @@ RUN chown -R www-data dmi-tcat
 RUN mkdir -p dmi-tcat/analysis/cache; chown www-data dmi-tcat/analysis/cache; chmod 755 dmi-tcat/analysis/cache;
 RUN mkdir -p dmi-tcat/logs; chown www-data dmi-tcat/logs; chmod 755 dmi-tcat/logs;
 RUN mkdir -p dmi-tcat/proc; chown www-data dmi-tcat/proc; chmod 755 dmi-tcat/proc;
+RUN sed -i 's/env_is_cli()/php_sapi_name()\ == \ "cli"/' dmi-tcat/capture/stream/controller.php
 WORKDIR /
 
 COPY geos.ini /etc/php5/mods-available/geos.ini
 RUN php5enmod geos
 RUN echo "<?php phpinfo(); ?>" >> /var/www/html/info.php
 RUN echo "<?php echo GEOSVersion(); ?>" >> /var/www/html/geostest.php
+
+RUN echo "cron.*                         /var/log/cron.log" >> /etc/rsyslog.d/50-default.conf 
+COPY tcat_crontab /etc/cron.d/tcat
+RUN chmod 600 /etc/cron.d/tcat
 
 COPY config.php /var/www/html/dmi-tcat/config.php
 COPY apache.conf /etc/apache2/sites-available/000-default.conf

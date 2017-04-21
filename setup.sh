@@ -22,8 +22,8 @@ token=${ARR[2]}
 tokensecret=${ARR[3]}
 if [ ! -z "$key" ] && [ ! -z "$keysecret" ] && [ ! -z "$token" ] && [ ! -z "$tokensecret" ]; then
 cp run_template run.sh
-sed -i "s/CONSUMERKEY/$key/" run.sh
-sed -i "s/CONSUMERSECRET/$keysecret/" run.sh
-sed -i "s/USERTOKEN/$token/" run.sh
-sed -i "s/USERSECRET/$tokensecret/" run.sh
+sed -i "s#CONSUMERKEY#$key#" run.sh
+sed -i "s#CONSUMERSECRET#$keysecret#" run.sh
+sed -i "s#USERTOKEN#$token#" run.sh
+sed -i "s#USERSECRET#$tokensecret#" run.sh
 fi
